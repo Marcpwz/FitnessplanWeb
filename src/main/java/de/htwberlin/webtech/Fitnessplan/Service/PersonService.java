@@ -20,7 +20,12 @@ public class PersonService {
     public List<Person> findAll() {
         List<PersonEntity> persons = personRepository.findAll();
         return persons.stream()
-                .map(this::transformEntity)
+                .map(personEntity -> new Person(
+                        personEntity.getId(),
+                        personEntity.getFirstName(),
+                        personEntity.getLastName(),
+                        personEntity.getVaccinated()
+                ))
                 .collect(Collectors.toList());
     }
 
