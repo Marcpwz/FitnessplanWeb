@@ -1,16 +1,17 @@
 package de.htwberlin.webtech.Fitnessplan.web.api;
 
 import java.util.Date;
+import java.time.LocalDate;
 public class Exercise {
 
     private long id;
     private String Name;
     private int Reps;
     private int Sets;
-    private int date;
+    private LocalDate date;
     private int duration;
 
-    public Exercise(long id, String name, int reps, int sets, int date, int duration) {
+    public Exercise(long id, String name, int reps, int sets, LocalDate date, int duration) {
         this.id = id;
         Name = name;
         Reps = reps;
@@ -54,11 +55,11 @@ public class Exercise {
         Sets = sets;
     }
 
-    public int getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.GenerationType;
 import java.util.Date;
+import java.time.LocalDate;
 
 @Entity(name = "exercise")
 public class ExerciseEntity {
@@ -23,11 +24,11 @@ public class ExerciseEntity {
     @Column(name = "Sets", nullable = false)
     private int sets;
     @Column(name = "date")
-    private int date;
+    private LocalDate date;
     @Column(name = "duration")
     private int duration;
 
-    public ExerciseEntity(String name, int reps, int sets, int date, int duration) {
+    public ExerciseEntity(String name, int reps, int sets, LocalDate date, int duration) {
         this.name = name;
         this.reps = reps;
         this.sets = sets;
@@ -67,11 +68,11 @@ public class ExerciseEntity {
         this.sets = sets;
     }
 
-    public int getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
