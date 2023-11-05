@@ -1,5 +1,6 @@
 package de.htwberlin.webtech.Fitnessplan.web;
 
+import de.htwberlin.webtech.Fitnessplan.Service.PersonService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,16 +13,16 @@ import java.util.List;
 public class PersonRestController {
 
     private List<Person> persons;
+    private final PersonService personService;
 
-    public PersonRestController() {
-        persons = new ArrayList<>();
-        persons.add(new Person (1, "Max","megamind",false));
-        persons.add(new Person (2, "Namste","baba",true));
+
+    public PersonRestController(PersonService personService) {
+        this.personService = personService;
     }
 
     @GetMapping(path = "/api/v1/persons")
     public ResponseEntity<List<Person>> fetchPersons() {
-        return ResponseEntity.ok(persons);
+        return ResponseEntity.ok(personService.findAll());
     }
 
 }
