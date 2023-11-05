@@ -1,4 +1,4 @@
-package de.htwberlin.webtech.Fitnessplan.web;
+package de.htwberlin.webtech.Fitnessplan.web.api;
 
 public class Person {
 
