@@ -19,8 +19,8 @@ public class ExerciseManipulationRequest {
         this.date = date;
         this.duration = duration;
 
-
     }
+
 
     public String getName() {
         return Name;
