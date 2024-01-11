@@ -6,7 +6,6 @@ import de.htwberlin.webtech.Fitnessplan.web.api.Exercise;
 import de.htwberlin.webtech.Fitnessplan.web.api.ExerciseManipulationRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,8 +31,7 @@ public class ExerciseService {
     }
 
     public Exercise create(ExerciseManipulationRequest request) {
-        Date birthDate = null;
-        var exerciseEntity = new ExerciseEntity(request.getName(), request.getReps(), request.getSets(), request.getDate(), request.getDuration());
+        var exerciseEntity = new ExerciseEntity(request.getName(), request.getReps(), request.getSets(), request.getWeight(), request.getDuration());
         exerciseEntity = exerciseRepository.save(exerciseEntity);
         return transformEntity(exerciseEntity);
     }
@@ -46,7 +44,6 @@ public class ExerciseService {
         }
 
         var exerciseEntity = exerciseEntityOptional.get();
-        exerciseEntity.setDate(request.getDate());
         exerciseEntity.setName(request.getName());
         exerciseEntity.setReps(request.getReps());
         exerciseEntity.setSets(request.getSets());
@@ -68,7 +65,7 @@ public class ExerciseService {
     }
 
     private Exercise transformEntity(ExerciseEntity exerciseEntity) {
-        return new Exercise(exerciseEntity.getId(),exerciseEntity.getName(),exerciseEntity.getReps(),exerciseEntity.getSets(),exerciseEntity.getDate(),exerciseEntity.getDuration());
+        return new Exercise(exerciseEntity.getId(),exerciseEntity.getName(),exerciseEntity.getReps(),exerciseEntity.getSets(), exerciseEntity.getWeight(), exerciseEntity.getDuration());
     }
 
 }

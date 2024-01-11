@@ -33,11 +33,11 @@ public class ExerciseRestController {
 
     @PostMapping(path = "/api/v1/exercise")
     public ResponseEntity<Void> createPerson(@RequestBody ExerciseManipulationRequest request) throws URISyntaxException {
+        System.out.println("TEST");
         var person = exerciseService.create(request);
         URI uri = new URI("/api/v1/exercise/" + person.getId());
         return ResponseEntity.created(uri).build();
     }
-
 
     @PutMapping(path = "/api/v1/exercise/{id}")
     public ResponseEntity<Exercise> updatePerson(@PathVariable Long id, @RequestBody ExerciseManipulationRequest request) {
@@ -45,12 +45,9 @@ public class ExerciseRestController {
         return person != null? ResponseEntity.ok(person) : ResponseEntity.notFound().build();
     }
 
-
-
     @DeleteMapping(path = "/api/v1/exercise/{id}")
     public ResponseEntity<Void> deletePerson(@PathVariable Long id) {
         boolean successful = exerciseService.deleteById(id);
         return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
-
 }

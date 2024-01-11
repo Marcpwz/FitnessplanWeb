@@ -6,8 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.GenerationType;
-import java.util.Date;
-import java.time.LocalDate;
+
+import java.time.LocalTime;
 
 @Entity(name = "exercise")
 public class ExerciseEntity {
@@ -21,18 +21,18 @@ public class ExerciseEntity {
     private String name;
     @Column(name = "Reps")
     private int reps;
-    @Column(name = "Sets", nullable = false)
+    @Column(name = "Sets")
     private int sets;
-    @Column(name = "date")
-    private LocalDate date;
+    @Column(name = "Weight")
+    private float Weight;
     @Column(name = "duration")
-    private int duration;
+    private LocalTime duration;
 
-    public ExerciseEntity(String name, int reps, int sets, LocalDate date, int duration) {
+    public ExerciseEntity(String name, int reps, int sets, float weight, LocalTime duration) {
         this.name = name;
         this.reps = reps;
         this.sets = sets;
-        this.date = date;
+        Weight = weight;
         this.duration = duration;
     }
 
@@ -41,8 +41,6 @@ public class ExerciseEntity {
     public Long getId() {
         return id;
     }
-
-
 
     public String getName() {
         return name;
@@ -68,19 +66,19 @@ public class ExerciseEntity {
         this.sets = sets;
     }
 
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public int getDuration() {
+    public LocalTime getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(LocalTime duration) {
         this.duration = duration;
+    }
+
+    public float getWeight() {
+        return Weight;
+    }
+
+    public void setWeight(float weight) {
+        Weight = weight;
     }
 }
