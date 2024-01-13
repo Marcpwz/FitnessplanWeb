@@ -13,11 +13,9 @@ import java.util.stream.Collectors;
 public class ExerciseService {
 
     private final ExerciseRepository exerciseRepository;
-
     public ExerciseService(ExerciseRepository personRepository) {
         this.exerciseRepository = personRepository;
     }
-
     public List<Exercise> findAll() {
         List<ExerciseEntity> exercises = exerciseRepository.findAll();
         return exercises.stream()
@@ -30,8 +28,15 @@ public class ExerciseService {
         return personEntity.map(this::transformEntity).orElse(null);
     }
 
+    public List<Exercise> findAllbytid(Long tid) {
+        List<ExerciseEntity> exercises = exerciseRepository.findAllBytid(tid);
+        return exercises.stream()
+                .map(this::transformEntity)
+                .collect(Collectors.toList());
+    }
+
     public Exercise create(ExerciseManipulationRequest request) {
-        var exerciseEntity = new ExerciseEntity(request.getName(), request.getReps(), request.getSets(), request.getWeight(), request.getDuration());
+        var exerciseEntity = new ExerciseEntity(request.getName(), request.getReps(), request.getSets(), request.getWeight(), request.getDuration(), request.getTid());
         exerciseEntity = exerciseRepository.save(exerciseEntity);
         return transformEntity(exerciseEntity);
     }
@@ -48,6 +53,7 @@ public class ExerciseService {
         exerciseEntity.setReps(request.getReps());
         exerciseEntity.setSets(request.getSets());
         exerciseEntity.setDuration(request.getDuration());
+        exerciseEntity.setTid(request.getTid());
         exerciseEntity = exerciseRepository.save(exerciseEntity);
 
         return transformEntity(exerciseEntity);
@@ -65,7 +71,7 @@ public class ExerciseService {
     }
 
     private Exercise transformEntity(ExerciseEntity exerciseEntity) {
-        return new Exercise(exerciseEntity.getId(),exerciseEntity.getName(),exerciseEntity.getReps(),exerciseEntity.getSets(), exerciseEntity.getWeight(), exerciseEntity.getDuration());
+        return new Exercise(exerciseEntity.getId(),exerciseEntity.getName(),exerciseEntity.getReps(),exerciseEntity.getSets(), exerciseEntity.getWeight(), exerciseEntity.getDuration(), exerciseEntity.getTid());
     }
 
 }

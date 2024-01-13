@@ -10,17 +10,27 @@ public class Exercise {
     private int Sets;
     private float Weight;
     private LocalTime duration;
+    private Long tid;
 
-    public Exercise(long id, String name, int reps, int sets, float weight, LocalTime duration) {
+    public Exercise(long id, String name, int reps, int sets, float weight, LocalTime duration, Long tid) {
         this.id = id;
         Name = name;
         Reps = reps;
         Sets = sets;
         Weight = weight;
         this.duration = duration;
+        this.tid = tid;
     }
 
     public Exercise() {
+    }
+
+    public Long getTid() {
+        return tid;
+    }
+
+    public void setTid(Long tid) {
+        this.tid = tid;
     }
 
     public long getId() {

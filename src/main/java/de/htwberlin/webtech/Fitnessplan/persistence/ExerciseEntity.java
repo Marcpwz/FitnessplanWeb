@@ -28,12 +28,16 @@ public class ExerciseEntity {
     @Column(name = "duration")
     private LocalTime duration;
 
-    public ExerciseEntity(String name, int reps, int sets, float weight, LocalTime duration) {
+    @Column(name = "tid")
+    private Long tid;
+
+    public ExerciseEntity(String name, int reps, int sets, float weight, LocalTime duration, Long tid) {
         this.name = name;
         this.reps = reps;
         this.sets = sets;
         Weight = weight;
         this.duration = duration;
+        this.tid = tid;
     }
 
     protected ExerciseEntity() {}
@@ -80,5 +84,13 @@ public class ExerciseEntity {
 
     public void setWeight(float weight) {
         Weight = weight;
+    }
+
+    public Long getTid() {
+        return tid;
+    }
+
+    public void setTid(Long tid) {
+        this.tid = tid;
     }
 }

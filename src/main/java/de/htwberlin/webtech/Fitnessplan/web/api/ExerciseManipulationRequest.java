@@ -10,18 +10,19 @@ public class ExerciseManipulationRequest {
     private float Weight;
     private LocalTime duration;
 
-    public ExerciseManipulationRequest(String name, int reps, int sets, float weight, LocalTime duration) {
+    private Long tid;
+
+    public ExerciseManipulationRequest(String name, int reps, int sets, float weight, LocalTime duration, Long tid) {
         Name = name;
         Reps = reps;
         Sets = sets;
         Weight = weight;
         this.duration = duration;
+        this.tid = tid;
     }
 
     public  ExerciseManipulationRequest()
-    {
-
-    }
+    {}
 
     public String getName() {
         return Name;
@@ -61,6 +62,14 @@ public class ExerciseManipulationRequest {
 
     public float getWeight() {
         return Weight;
+    }
+
+    public Long getTid() {
+        return tid;
+    }
+
+    public void setTid(Long tid) {
+        this.tid = tid;
     }
 }
 
