@@ -14,8 +14,6 @@ import java.util.List;
 public class ExerciseRestController {
 
     private final ExerciseService exerciseService;
-
-
     public ExerciseRestController(ExerciseService exerciseService) {
         this.exerciseService = exerciseService;
     }
@@ -29,6 +27,7 @@ public class ExerciseRestController {
         var person = exerciseService.findById(id);
         return person != null? ResponseEntity.ok(person) : ResponseEntity.notFound().build();
     }
+
 
     @GetMapping(path = "/api/v1/exercise/Trainday{tid}")
     public ResponseEntity<List<Exercise>> fetchExerciseByTid(@PathVariable Long tid) {
@@ -54,5 +53,11 @@ public class ExerciseRestController {
     public ResponseEntity<Void> deleteExercise(@PathVariable Long id) {
         boolean successful = exerciseService.deleteById(id);
         return successful? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping(path = "/api/v1/exercise/tid/{tid}")
+    public boolean deleteExercisebytid(@PathVariable Long tid) {
+        boolean successful = exerciseService.deleteByTid(tid);
+        return successful;
     }
 }

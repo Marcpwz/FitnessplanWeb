@@ -5,13 +5,13 @@ import de.htwberlin.webtech.Fitnessplan.persistence.ExerciseRepository;
 import de.htwberlin.webtech.Fitnessplan.web.api.Exercise;
 import de.htwberlin.webtech.Fitnessplan.web.api.ExerciseManipulationRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class ExerciseService {
-
     private final ExerciseRepository exerciseRepository;
     public ExerciseService(ExerciseRepository personRepository) {
         this.exerciseRepository = personRepository;
@@ -59,13 +59,15 @@ public class ExerciseService {
         return transformEntity(exerciseEntity);
     }
 
-
-
+    @Transactional
+    public boolean deleteByTid(Long id) {
+        exerciseRepository.deleteAllBytid(id);
+        return true;
+    }
     public boolean deleteById(Long id) {
         if (!exerciseRepository.existsById(id)) {
             return false;
         }
-
         exerciseRepository.deleteById(id);
         return true;
     }

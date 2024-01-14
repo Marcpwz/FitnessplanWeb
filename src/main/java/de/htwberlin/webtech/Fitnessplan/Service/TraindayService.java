@@ -1,10 +1,7 @@
 package de.htwberlin.webtech.Fitnessplan.Service;
 
-import de.htwberlin.webtech.Fitnessplan.persistence.ExerciseEntity;
 import de.htwberlin.webtech.Fitnessplan.persistence.TraindayEntity;
 import de.htwberlin.webtech.Fitnessplan.persistence.TraindayRepository;
-import de.htwberlin.webtech.Fitnessplan.web.api.Exercise;
-import de.htwberlin.webtech.Fitnessplan.web.api.ExerciseManipulationRequest;
 import de.htwberlin.webtech.Fitnessplan.web.api.Trainday;
 import de.htwberlin.webtech.Fitnessplan.web.api.TraindayManipulationRequest;
 import org.springframework.stereotype.Service;
@@ -15,7 +12,10 @@ import java.util.stream.Collectors;
 @Service
 public class TraindayService {
     private final TraindayRepository traindayRepository;
-    public TraindayService(TraindayRepository traindayRepository) { this.traindayRepository = traindayRepository; }
+    private final ExerciseService exerciseService;
+    public TraindayService(TraindayRepository traindayRepository, ExerciseService exerciseService) { this.traindayRepository = traindayRepository;
+        this.exerciseService = exerciseService;
+    }
 
     public List<Trainday> findAll() {
         List<TraindayEntity> traindays = traindayRepository.findAll();
@@ -52,8 +52,8 @@ public class TraindayService {
         if (!traindayRepository.existsById(id)) {
             return false;
         }
-
         traindayRepository.deleteById(id);
+        exerciseService.deleteByTid(id);
         return true;
     }
 

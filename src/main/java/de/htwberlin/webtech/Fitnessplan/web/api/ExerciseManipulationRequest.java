@@ -9,7 +9,6 @@ public class ExerciseManipulationRequest {
     private int Sets;
     private float Weight;
     private LocalTime duration;
-
     private Long tid;
 
     public ExerciseManipulationRequest(String name, int reps, int sets, float weight, LocalTime duration, Long tid) {

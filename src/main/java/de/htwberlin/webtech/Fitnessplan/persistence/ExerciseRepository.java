@@ -10,4 +10,7 @@ public interface ExerciseRepository extends JpaRepository<ExerciseEntity, Long> 
 
     List<ExerciseEntity> findAllBytid(Long tid);
 
+    void deleteAllBytid(Long tid);
+
+
 }
